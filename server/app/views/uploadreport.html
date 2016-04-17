@@ -1,0 +1,22 @@
+<form>
+    Product name: <input type="text" ng-model="newProduct.name"/><br>
+    Product EAN: <input type="text" ng-model="newProduct.ean"/><br>
+    <input type="submit" ng-click="submit(newProduct)" value="Submit" />
+</form>
+
+<p>
+    Submit result: {{submitResult}}
+</p>
+
+<h2>Vorschau</h2>
+<p>
+    Name: {{newProduct.name}}<br>
+    EAN: {{newProduct.ean}}
+</p>
+
+<p>
+    New Product: {{newProductX}}
+
+
+
+</p>
