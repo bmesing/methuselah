@@ -7,16 +7,14 @@ angular.module('produktinformationApp')
 
     $scope.init = function() {
 
-        $http.get('http://127.0.0.1:5984/productinformation/_all_docs?include_docs=true')
+        $http.get('http://127.0.0.1:5984/productinformation/_design/products/_view/products')
             .then(function success(response) {
             console.log(response.data.rows);
 
             for (var i = 0; i < response.data.rows.length; i++) {
-                var product = response.data.rows[i].doc;
+                var product = response.data.rows[i];
                 console.log(product);
-                if (product.ean) {
-                    $scope.data.products[product.ean] = product;
-                }
+                $scope.data.products[product.id] = product.value;
             }
         }, function error(response) {
 
@@ -27,3 +25,4 @@ angular.module('produktinformationApp')
     $scope.init();
 
   });
+

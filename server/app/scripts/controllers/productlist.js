@@ -9,4 +9,4 @@
  */
 angular.module('produktinformationApp')
   .controller('ProductlistCtrl', function ($scope) {
-  });
+});

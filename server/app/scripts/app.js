@@ -13,7 +13,9 @@ angular
     'ngAnimate',
     'ngResource',
     'ngRoute',
-    'ngTouch'
+    'ngTouch',
+    'ui.bootstrap',
+
   ])
   .config(function ($routeProvider) {
     $routeProvider

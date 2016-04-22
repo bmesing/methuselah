@@ -1,7 +1,36 @@
+<div ng-controller="UploadreportCtrl">
+
+<h1>
+    Produkt bewerten
+</h1>
 <form>
-    Product name: <input type="text" ng-model="newProduct.name"/><br>
-    Product EAN: <input type="text" ng-model="newProduct.ean"/><br>
-    <input type="submit" ng-click="submit(newProduct)" value="Submit" />
+
+    <input type="text" placeholder="Produktname" class="form-control"  ng-model="newProduct.name"/><br>
+    <input type="text" placeholder="EAN" class="form-control" ng-model="newProduct.ean"/><br>
+    <input type="text" placeholder="Hersteller" class="form-control" ng-model="newProduct.hersteller"/><br>
+
+    <p>
+        Reparierbarkeit<br>
+        <div class="btn-group">
+            <label class="btn btn-primary" ng-model="newProduct.reparability" uib-btn-radio="1" uncheckable>sehr schlecht</label>
+            <label class="btn btn-primary" ng-model="newProduct.reparability" uib-btn-radio="2" uncheckable>schlecht</label>
+            <label class="btn btn-primary" ng-model="newProduct.reparability" uib-btn-radio="3" uncheckable>ok</label>
+            <label class="btn btn-primary" ng-model="newProduct.reparability" uib-btn-radio="4" uncheckable>sehr gut</label>
+        </div>
+    </p>
+
+    <p>
+        Haltbarkeit<br>
+
+        <input name="durability" checked="true" type="radio">nicht bewertet</input>
+        <input name="durability" type="radio">sehr gut</input>
+        <input name="durability" type="radio">ok</input>
+        <input name="durability" type="radio">mäßig</input>
+        <input name="durability" type="radio">sehr schlecht</input>
+
+    </p>
+    <input type="submit" class="btn btn-default" ng-click="submit(newProduct)" value="Submit" />
+
 </form>
 
 <p>
@@ -11,7 +40,8 @@
 <h2>Vorschau</h2>
 <p>
     Name: {{newProduct.name}}<br>
-    EAN: {{newProduct.ean}}
+    EAN: {{newProduct.ean}}<br>
+    Reparierbarkeit: {{newProduct.reparability}}
 </p>
 
 <p>
@@ -20,3 +50,5 @@
 
 
 </p>
+
+</div>
