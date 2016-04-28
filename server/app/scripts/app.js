@@ -15,7 +15,7 @@ angular
     'ngRoute',
     'ngTouch',
     'ui.bootstrap',
-
+    'smart-table',
   ])
   .config(function ($routeProvider) {
     $routeProvider
