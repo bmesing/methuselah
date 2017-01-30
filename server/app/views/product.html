@@ -1,9 +1,12 @@
 <h1>{{data.product.name}}</h1>
 
 
-<li>EAN: {{data.product.ean}}</li>
+<p>EAN: {{data.product.ean}}</p>
 
 <p>
 id:
     {{data.product._id}}
+</p>
+<p>
+    <button type="button" ng-click="onUploadImageClick()" class="btn btn-sm" >Foto hinzufügen</button>
 </p>

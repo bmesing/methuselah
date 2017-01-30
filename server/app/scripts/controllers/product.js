@@ -24,6 +24,9 @@ angular.module('produktinformationApp')
 
     }
 
+    $scope.onUploadImageClick = function() {
+    }
+
     $scope.init();
 
 
