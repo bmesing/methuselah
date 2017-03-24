@@ -1,0 +1,31 @@
+
+<table st-table="rowCollection" class="table table-striped">
+    <thead>
+    <tr>
+        <th>Produkt</th>
+        <th>EAN</th>
+        <th>Reparierbarkeit</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let product of products">
+      <td><a [routerLink]="['/product-detail', product._id]" >{{product.name}}</a></td>
+        <td>{{product.ean}}</td>
+        <td>{{product.reparability !== undefined ? product.reparability : "keine Bewertung"}}</td>
+        <td *ngIf="deleteModeActive">
+            <button type="button" ng-click="deleteItem(_id, product._rev)" class="btn btn-sm btn-danger">
+                <i class="glyphicon glyphicon-remove-circle">
+                </i>
+            </button>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<hr>
+
+
+
+<button type="button" checkable="true" checked="true" (click)="toggleDeleteMode()" class="btn btn-sm btn-danger" [class.active]="deleteModeActive">
+  Löschenmodus
+</button>

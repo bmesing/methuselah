@@ -1,0 +1,14 @@
+<div *ngIf="product">
+  Selected: {{product.name}}
+  <p>
+    <input [(ngModel)]="product.name" placeholder="name"/>
+  </p>
+
+  <div>
+    Reparierbarkeit: {{product.reparability !== undefined ? product.reparability : "keine Bewertung"}}
+
+  </div>
+
+</div>
+
+<button (click)="goBack()">Back</button>
