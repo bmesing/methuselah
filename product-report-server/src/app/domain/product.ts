@@ -9,4 +9,6 @@ export class Product {
     name: string;
     ean: string;
     reparability: string;
+    durability: string;
+    manufacturer: string;
 }
