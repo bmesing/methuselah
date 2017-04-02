@@ -4,9 +4,9 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
-import { ProductComponent } from "./product.component";
-import {ProductListComponent} from "./productlist.component";
-import {DashboardComponent} from "./dashboard.component";
+import { ProductComponent } from "./component/product-detail/product.component";
+import {ProductListComponent} from "./component/product-list/productlist.component";
+import {DashboardComponent} from "./component/dashboard/dashboard.component";
 import {ProductService} from "./domain/product.service";
 import {AppRoutingModule} from "./app-routing.module";
 import {AddReviewComponent} from "./component/add-review/add-review.component";

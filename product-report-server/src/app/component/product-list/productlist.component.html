@@ -13,7 +13,7 @@
         <td>{{product.ean}}</td>
         <td>{{product.reparability !== undefined ? product.reparability : "keine Bewertung"}}</td>
         <td *ngIf="deleteModeActive">
-            <button type="button" ng-click="deleteItem(_id, product._rev)" class="btn btn-sm btn-danger">
+            <button type="button" (click)="deleteProduct(product)" class="btn btn-sm btn-danger">
                 <i class="glyphicon glyphicon-remove-circle">
                 </i>
             </button>

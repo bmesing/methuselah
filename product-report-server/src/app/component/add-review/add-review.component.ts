@@ -8,6 +8,7 @@ import {Router} from "@angular/router";
 import {Product} from "../../domain/product";
 
 import {ButtonRadioDirective} from 'ng2-bootstrap';
+import {NgForm} from "@angular/forms";
 
 
 @Component({
@@ -30,6 +31,13 @@ export class AddReviewComponent implements OnInit {
     ngOnInit() : void {
     }
 
-  // TODO: Remove this when we're done
-  get diagnostic() { return JSON.stringify(this.newProduct); }
+    onSubmit() : void {
+        this.productService.addReview(this.newProduct).subscribe(
+            response => console.log("Add success"),
+            error => console.error("Add failed:" + error)
+        )
+    }
+
+    // TODO: Remove this when we're done
+    get diagnostic() { return JSON.stringify(this.newProduct); }
 }

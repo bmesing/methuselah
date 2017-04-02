@@ -5,8 +5,8 @@
 import {Component, Input, OnInit} from '@angular/core'
 import {ActivatedRoute, Params} from "@angular/router";
 import { Location }                 from '@angular/common';
-import {Product} from "./domain/product";
-import {ProductService} from "./domain/product.service";
+import {Product} from "../../domain/product";
+import {ProductService} from "../../domain/product.service";
 
 import 'rxjs/add/operator/switchMap';
 

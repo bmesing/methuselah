@@ -3,24 +3,24 @@
   <h1>
     Produkt bewerten
   </h1>
-  <!--<form class="form-horizontal" role="form">-->
+  <form class="form-horizontal" (ngSubmit)="onSubmit()">
 
     <input type="text" placeholder="Produktname" class="form-control"  [(ngModel)]="newProduct.name" name ="name"/><br>
     <input type="text" placeholder="EAN" class="form-control" [(ngModel)]="newProduct.ean" name="ean"/><br>
     <input type="text" placeholder="Hersteller" class="form-control" [(ngModel)]="newProduct.manufacturer" name="manufacturer"/><br>
 
-<!--    <div class="form-group"> -->
+    <div class="form-group">
         <label class="control-label col-sm-3">Reparierbarkeit:</label>
         <div class="col-sm-9">
 
           <div class="btn-group">
-                  <label class="btn btn-primary" [(ngModel)]="newProduct.reparability" btnRadio="1" ngDefaultControl>sehr schlecht</label>
-                  <label class="btn btn-primary" [(ngModel)]="newProduct.reparability" btnRadio="2" ngDefaultControl>schlecht</label>
-                  <label class="btn btn-primary" [(ngModel)]="newProduct.reparability" btnRadio="3" ngDefaultControl>ok</label>
-                  <label class="btn btn-primary" [(ngModel)]="newProduct.reparability" btnRadio="4" ngDefaultControl>sehr gut</label>
+                  <label class="btn btn-primary" [(ngModel)]="newProduct.reparability" btnRadio="1" name="reparability" ngDefaultControl>sehr schlecht</label>
+                  <label class="btn btn-primary" [(ngModel)]="newProduct.reparability" btnRadio="2" name="reparability" ngDefaultControl>schlecht</label>
+                  <label class="btn btn-primary" [(ngModel)]="newProduct.reparability" btnRadio="3" name="reparability" ngDefaultControl>ok</label>
+                  <label class="btn btn-primary" [(ngModel)]="newProduct.reparability" btnRadio="4" name="reparability" ngDefaultControl>sehr gut</label>
           </div>
         </div>
-    <!--</div>-->
+    </div>
 
     <!--
 
@@ -54,7 +54,7 @@
       </div>
     </div>
 
- <!-- </form>-->
+  </form>
 <!--
   <p>
     Submit result: {{submitResult}}

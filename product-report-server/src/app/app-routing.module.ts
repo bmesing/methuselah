@@ -4,10 +4,10 @@
 
 import {NgModule} from '@angular/core';
 
-import {ProductComponent} from "./product.component";
-import {ProductListComponent} from "./productlist.component";
 import {RouterModule, Routes} from "@angular/router";
-import {DashboardComponent} from "./dashboard.component";
+import {ProductComponent} from "./component/product-detail/product.component";
+import {ProductListComponent} from "./component/product-list/productlist.component";
+import {DashboardComponent} from "./component/dashboard/dashboard.component";
 import {AddReviewComponent} from "./component/add-review/add-review.component";
 
 

@@ -4,8 +4,8 @@
 
 
 import {Component, OnInit} from '@angular/core';
-import {Product} from "./domain/product";
-import {ProductService} from "./domain/product.service";
+import {Product} from "../../domain/product";
+import {ProductService} from "../../domain/product.service";
 import {Router} from "@angular/router";
 
 @Component({
@@ -23,7 +23,7 @@ export class DashboardComponent implements OnInit {
 
     ngOnInit() : void {
         this.productService.getProducts()
-            .then(products => this.products = products.slice(1, 3));
+            .subscribe(products => this.products = products.slice(0, 3));
     }
 
     navigateToAddReview() : void {
