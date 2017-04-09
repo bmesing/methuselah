@@ -1,0 +1,8 @@
+{
+  "language" : "javascript",
+  "views": {
+    "products": {
+      "map": "function(doc) { \n  if (doc.type ==\"product\") \n    emit(doc.name, doc);\n}"
+    }
+  }
+}
