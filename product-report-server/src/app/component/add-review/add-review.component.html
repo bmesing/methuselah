@@ -10,33 +10,28 @@
     <input type="text" placeholder="Hersteller" class="form-control" [(ngModel)]="newProduct.manufacturer" name="manufacturer"/><br>
 
     <div class="form-group">
-        <label class="control-label col-sm-3">Reparierbarkeit:</label>
-        <div class="col-sm-9">
-
-          <div class="btn-group">
-                  <label class="btn btn-primary" [(ngModel)]="newProduct.reparability" btnRadio="1" name="reparability" ngDefaultControl>sehr schlecht</label>
-                  <label class="btn btn-primary" [(ngModel)]="newProduct.reparability" btnRadio="2" name="reparability" ngDefaultControl>schlecht</label>
-                  <label class="btn btn-primary" [(ngModel)]="newProduct.reparability" btnRadio="3" name="reparability" ngDefaultControl>ok</label>
-                  <label class="btn btn-primary" [(ngModel)]="newProduct.reparability" btnRadio="4" name="reparability" ngDefaultControl>sehr gut</label>
-          </div>
+      <label class="control-label col-sm-3">Reparierbarkeit:</label>
+      <div class="col-sm-9">
+        <div class="btn-group">
+          <label class="btn btn-primary" [(ngModel)]="newProduct.reparability" btnRadio="1" name="reparability" ngDefaultControl>sehr schlecht</label>
+          <label class="btn btn-primary" [(ngModel)]="newProduct.reparability" btnRadio="2" name="reparability" ngDefaultControl>schlecht</label>
+          <label class="btn btn-primary" [(ngModel)]="newProduct.reparability" btnRadio="3" name="reparability" ngDefaultControl>ok</label>
+          <label class="btn btn-primary" [(ngModel)]="newProduct.reparability" btnRadio="4" name="reparability" ngDefaultControl>sehr gut</label>
         </div>
+      </div>
     </div>
-
-    <!--
 
     <div class="form-group">
       <label class="control-label col-sm-3">Haltbarkeit:</label>
       <div class="col-sm-9">
         <div class="btn-group">
-          <label class="btn btn-primary control-label" [(ngModel)]="newProduct.durability" uib-btn-radio="1" uncheckable>sehr schlecht</label>
-          <label class="btn btn-primary control-label" [(ngModel)]="newProduct.durability" uib-btn-radio="2" uncheckable>schlecht</label>
-          <label class="btn btn-primary control-label" [(ngModel)]="newProduct.durability" uib-btn-radio="3" uncheckable>ok</label>
-          <label class="btn btn-primary control-label" [(ngModel)]="newProduct.durability" uib-btn-radio="4" uncheckable>sehr gut</label>
+          <label class="btn btn-primary" [(ngModel)]="newProduct.durability" btnRadio="1" name="durability" ngDefaultControl>sehr schlecht</label>
+          <label class="btn btn-primary" [(ngModel)]="newProduct.durability" btnRadio="2" name="durability" ngDefaultControl>schlecht</label>
+          <label class="btn btn-primary" [(ngModel)]="newProduct.durability" btnRadio="3" name="durability" ngDefaultControl>ok</label>
+          <label class="btn btn-primary" [(ngModel)]="newProduct.durability" btnRadio="4" name="durability" ngDefaultControl>sehr gut</label>
         </div>
       </div>
     </div>
-
--->
     :
     <div class="btn-group">
 
