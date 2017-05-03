@@ -38,7 +38,7 @@ export class ProductService {
 
 
     getAttachmentUrl(product: Product) : string{
-        return ProductService.baseUrl + product._id + "/myfile.png" + "?rev=" + product._rev;
+        return ProductService.baseUrl + product._id + "/" + Math.ceil(Math.random() * 100000000)  + "?rev=" + product._rev;
     }
 
     deleteProduct(itemId: string, rev: string): Observable<Response> {

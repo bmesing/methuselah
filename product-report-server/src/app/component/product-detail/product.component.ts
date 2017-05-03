@@ -23,7 +23,6 @@ export class ProductComponent implements OnInit {
 
     uploader: FileUploader;
 
-    imageUploadUrl: string;
 
     constructor(
         private productService: ProductService,
@@ -35,12 +34,11 @@ export class ProductComponent implements OnInit {
         this.route.params.switchMap((params: Params) =>
                 this.productService.getProduct(params['id'])
         ).subscribe(product => {
-            console.log('onNext: %s', product._id);
-            this.product = product
-            this.imageUploadUrl = this.productService.getAttachmentUrl(product);
-            // TODO error handling if accessed later, but no uploader was initialized
-            this.uploader = new FileUploader({url: this.imageUploadUrl, queueLimit : 1, method: "PUT", disableMultipart:true, itemAlias : "_attachments", additionalParameter : {"_rev" : product._rev}});
-        },
+                console.log('onNext: %s', product._id);
+                this.product = product
+                // TODO error handling if accessed later, but no uploader was initialized
+                this.uploader = new FileUploader({url: this.productService.getAttachmentUrl(product), method: "PUT", disableMultipart:true});
+            },
             e => console.log('onError: %s', e),
             () => console.log('onCompleted')
         )
@@ -52,8 +50,16 @@ export class ProductComponent implements OnInit {
 
     uploadImage(): void {
         console.log("Uploading image");
+
+        // remove all entries except the last one
+        while (this.uploader.queue.length > 1) {
+            this.uploader.queue[0].remove();
+        }
+        this.uploader.setOptions({url : this.productService.getAttachmentUrl(this.product)});
+        var component = this;
         this.uploader.onSuccessItem = function(item:any, response:any, status:any, headers:any): any
         {
+            component.product._rev = JSON.parse(response).rev;
             return console.log("Upload Success");
         };
 
