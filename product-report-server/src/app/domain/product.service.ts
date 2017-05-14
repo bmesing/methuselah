@@ -24,6 +24,13 @@ export class ProductService {
             .map(response => ProductService.extractProducts(response));
     }
 
+    search(searchTerm: string) : Observable<Product[]> {
+        console.log("searching for " + searchTerm);
+        return this.http.get(ProductService.baseUrl + "_design/products/_view/search_by_phrase?startkey=\"" + searchTerm + "\"&endkey=\"" + searchTerm + "\uffff\"")
+            .map(response => ProductService.extractProducts(response));
+    }
+
+
     getProduct(id: string) : Observable<Product> {
         return this
             .getProducts()
@@ -58,6 +65,7 @@ export class ProductService {
     }
 
     private static extractProducts(body : Body) : Product[] {
+        console.log("Response: " + body);
         let products : Product[] = [];
         for (var row of body.json().rows) {
             products.push(row.value as Product)

@@ -1,17 +1,53 @@
-<h3>Top Products</h3>
-<div>
-<div class="grid grid-pad">
-  <a *ngFor="let product of products" class="col-1-4" [routerLink]="['/product-detail', product._id]">
-    <div class="module product">
-      <h4>{{product.name}}</h4>
 
-    </div>
-  </a>
+
+
+<div class="container">
+	<div class="row">
+        <div class="col-sm-6 col-sm-offset-3">
+            <div id="imaginary_container"> 
+                <div class="input-group stylish-input-group">
+                    <input type="text" class="form-control" placeholder="Suche nach Produktname / EAN" #searchBox id="search-box" (keyup)="search(searchBox.value)" />
+                    <span class="input-group-addon">
+                        <button type="submit">
+                            <span class="glyphicon glyphicon-search"></span>
+                        </button>  
+                    </span>
+                </div>
+            </div>
+        </div>
+	</div>
 </div>
-</div>
-<br>
 <br><br><br>
+<button class="btn btn-primary dashboard-button" (click)="navigateToAddReview()" >Produkt bewerten</button>
+
+
+<table st-table="rowCollection" class="table table-striped">
+    <thead>
+    <tr>
+        <th>Produkt</th>
+        <th>EAN</th>
+        <th>Reparierbarkeit</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let product of products">
+      <td><a [routerLink]="['/product-detail', product._id]" >{{product.name}}</a></td>
+        <td>{{product.ean}}</td>
+        <td>{{product.reparability !== undefined ? product.reparability : "keine Bewertung"}}</td>
+        <td *ngIf="deleteModeActive">
+            <button type="button" (click)="deleteProduct(product)" class="btn btn-sm btn-danger">
+                <i class="glyphicon glyphicon-remove-circle">
+                </i>
+            </button>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
 <hr>
-<div>
-  <button (click)="navigateToAddReview()" >Produkt bewerten</button>
-</div>
+
+
+
+<button type="button" checkable="true" checked="true" (click)="toggleDeleteMode()" class="btn btn-sm btn-danger" [class.active]="deleteModeActive">
+  Löschenmodus
+</button>
