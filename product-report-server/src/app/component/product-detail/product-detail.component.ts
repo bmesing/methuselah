@@ -13,12 +13,12 @@ import { FileUploader } from 'ng2-file-upload/ng2-file-upload';
 import 'rxjs/add/operator/switchMap';
 
 @Component({
-    selector: 'product',
-    templateUrl: './product.component.html',
-    styleUrls: ['./product.component.css'],
+    selector: 'product-detail',
+    templateUrl: './product-detail.component.html',
+    styleUrls: ['./product-detail.component.css'],
 })
 
-export class ProductComponent implements OnInit {
+export class ProductDetailComponent implements OnInit {
     product: Product;
 
     uploader: FileUploader;

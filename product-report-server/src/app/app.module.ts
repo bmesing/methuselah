@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
-import { ProductComponent } from "./component/product-detail/product.component";
+import { ProductComponent } from "./component/product-detail/product-detail.component";
 import { ProductListComponent } from "./component/product-list/productlist.component";
 import { DashboardComponent } from "./component/dashboard/dashboard.component";
 import { ProductService } from "./domain/product.service";
