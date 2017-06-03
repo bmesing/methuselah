@@ -1,27 +1,10 @@
 
 
-
-<div class="container">
-	<div class="row">
-        <div class="col-sm-6 col-sm-offset-3">
-            <div id="imaginary_container"> 
-                <div class="input-group stylish-input-group">
-                    <input type="text" class="form-control" placeholder="Suche nach Produktname / EAN" #searchBox id="search-box" (keyup)="search(searchBox.value)" />
-                    <span class="input-group-addon">
-                        <button type="submit">
-                            <span class="glyphicon glyphicon-search"></span>
-                        </button>  
-                    </span>
-                </div>
-            </div>
-        </div>
-	</div>
+<div id="searchInputSection">
+    <input type="text" class="form-control" placeholder="Suche nach Produktname / EAN" #searchBox id="search-box" (keyup)="search(searchBox.value)" />
 </div>
-<br><br><br>
-<button class="btn btn-primary dashboard-button" (click)="navigateToAddReview()" >Produkt bewerten</button>
 
-
-<table st-table="rowCollection" class="table table-striped">
+<table st-table="rowCollection" class="table table-striped" *ngIf="products.length != 0">
     <thead>
     <tr>
         <th>Produkt</th>
@@ -44,9 +27,10 @@
     </tbody>
 </table>
 
+
+<button class="btn btn-primary dashboard-button" (click)="navigateToAddReview()" >Produkt bewerten</button>
+
 <hr>
-
-
 
 <button type="button" checkable="true" checked="true" (click)="toggleDeleteMode()" class="btn btn-sm btn-danger" [class.active]="deleteModeActive">
   Löschenmodus

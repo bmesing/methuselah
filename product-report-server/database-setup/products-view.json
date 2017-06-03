@@ -2,10 +2,13 @@
   "language" : "javascript",
   "views": {
     "products": {
-      "map": "function(doc) { \n  if (doc.type ==\"product\") \n    emit(doc.name, doc);\n}"
+      "map": "function(doc) { \n  if (doc.type ==\"product\") \n    emit(doc.name.toLowerCase(), doc);\n}"
+    },
+    "manufacturers": {
+      "map": "function(doc) { \n  if (doc.type ==\"manufacturer\") \n    emit(doc.name.toLowerCase(), doc);\n}"
     },
     "search_by_phrase": {
-       "map": "function(doc) {\nif (doc.type ==\"product\") {\nif (doc.type)\nemit(doc.name, doc);\nif (doc.ean)\nemit (doc.ean, doc);\n}\n}\n"
+       "map": "function(doc) {\nif (doc.type ==\"product\") {\nif (doc.type)\nemit(doc.name.toLowerCase(), doc);\nif (doc.ean)\nemit (doc.ean, doc);\n}\n}\n"
     }
   }
 }

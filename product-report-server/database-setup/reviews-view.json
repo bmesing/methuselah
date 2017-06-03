@@ -1,0 +1,8 @@
+{
+  "language" : "javascript",
+  "views": {
+    "reviews": {
+      "map": "function(doc) { \n  if (doc.type ==\"review\") \n    emit(doc.name, doc);\n}"
+    }
+  }
+}
