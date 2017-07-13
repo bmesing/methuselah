@@ -9,6 +9,7 @@
         [typeahead]="dataSource" 
         typeaheadOptionsLimit="20"
         (typeaheadOnSelect)="onProductSelected($event)"
+        typeaheadOptionField="displayName"
         /><br>
     <input type="text" placeholder="Hersteller" class="form-control" [(ngModel)]="manufacturerName" name="manufacturer" required/><br>
     <input type="text" placeholder="Produktname" class="form-control"  [(ngModel)]="product.name" name ="name" required/><br>

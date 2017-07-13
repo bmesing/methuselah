@@ -14,6 +14,15 @@ import { Observable } from "rxjs/Observable";
 import { TypeaheadMatch } from 'ngx-bootstrap/typeahead';
 
 
+export class ProductTypeAhead {
+    constructor(
+        private displayName: string,
+        private product: Product,
+    ) {
+
+    }
+}
+
 @Component({
     selector: 'add-review',
     templateUrl: './add-review.component.html'
@@ -40,11 +49,11 @@ export class AddReviewComponent implements OnInit {
         this.product.ean = "234324";
     }
     
-    mapToProductNames(products : Product[]) : string[] {
+    mapToTypeaheadItems(products : Product[]) : ProductTypeAhead[] {
         console.log("mapToProductNames");
-        let productNames : string[] = [];
+        let productNames : ProductTypeAhead[] = [];
         for (var product of products) {
-            productNames.push(product.name + " (" + product.ean + ")");
+            productNames.push(new ProductTypeAhead(product.name + " (" + product.ean + ")", product));
         }        
         return productNames;
     }
@@ -83,7 +92,7 @@ export class AddReviewComponent implements OnInit {
 
         //return term ? this.productService.searchEan(term) : Observable.of<Product[]>([])
         return this.productService.searchEan(term)
-            .map(products => this.mapToProductNames(products))
+            .map(products => this.mapToTypeaheadItems(products))
             .catch(error => {
                 // TODO: add real error handling
                 console.log(error);
@@ -102,6 +111,8 @@ export class AddReviewComponent implements OnInit {
 
         console.log(event);
         this.product.name = event.value;
+
+        TODO: continue here
     }
 
     onSubmit() : void {
