@@ -5,18 +5,22 @@
   </h1>
   <form class="form-horizontal" (ngSubmit)="onSubmit()">
 
-    <input type="text" placeholder="EAN" class="form-control" [(ngModel)]="newProduct.ean" name="ean"/><br>
+    <input type="text" placeholder="EAN" class="form-control" [(ngModel)]="product.ean" name="ean" autocomplete="off" 
+        [typeahead]="dataSource" 
+        typeaheadOptionsLimit="20"
+        (typeaheadOnSelect)="onProductSelected($event)"
+        /><br>
     <input type="text" placeholder="Hersteller" class="form-control" [(ngModel)]="manufacturerName" name="manufacturer" required/><br>
-    <input type="text" placeholder="Produktname" class="form-control"  [(ngModel)]="newProduct.name" name ="name" required/><br>
+    <input type="text" placeholder="Produktname" class="form-control"  [(ngModel)]="product.name" name ="name" required/><br>
 
     <div class="form-group">
       <label class="control-label col-sm-3">Reparierbarkeit:</label>
       <div class="col-sm-9">
         <div class="btn-group">
-          <label class="btn btn-primary" [(ngModel)]="newProduct.reparability" btnRadio="1" name="reparability" ngDefaultControl>sehr schlecht</label>
-          <label class="btn btn-primary" [(ngModel)]="newProduct.reparability" btnRadio="2" name="reparability" ngDefaultControl>schlecht</label>
-          <label class="btn btn-primary" [(ngModel)]="newProduct.reparability" btnRadio="3" name="reparability" ngDefaultControl>ok</label>
-          <label class="btn btn-primary" [(ngModel)]="newProduct.reparability" btnRadio="4" name="reparability" ngDefaultControl>sehr gut</label>
+          <label class="btn btn-primary" [(ngModel)]="product.reparability" btnRadio="1" name="reparability" ngDefaultControl>sehr schlecht</label>
+          <label class="btn btn-primary" [(ngModel)]="product.reparability" btnRadio="2" name="reparability" ngDefaultControl>schlecht</label>
+          <label class="btn btn-primary" [(ngModel)]="product.reparability" btnRadio="3" name="reparability" ngDefaultControl>ok</label>
+          <label class="btn btn-primary" [(ngModel)]="product.reparability" btnRadio="4" name="reparability" ngDefaultControl>sehr gut</label>
         </div>
       </div>
     </div>
@@ -25,10 +29,10 @@
       <label class="control-label col-sm-3">Haltbarkeit:</label>
       <div class="col-sm-9">
         <div class="btn-group">
-          <label class="btn btn-primary" [(ngModel)]="newProduct.durability" btnRadio="1" name="durability" ngDefaultControl>sehr schlecht</label>
-          <label class="btn btn-primary" [(ngModel)]="newProduct.durability" btnRadio="2" name="durability" ngDefaultControl>schlecht</label>
-          <label class="btn btn-primary" [(ngModel)]="newProduct.durability" btnRadio="3" name="durability" ngDefaultControl>ok</label>
-          <label class="btn btn-primary" [(ngModel)]="newProduct.durability" btnRadio="4" name="durability" ngDefaultControl>sehr gut</label>
+          <label class="btn btn-primary" [(ngModel)]="product.durability" btnRadio="1" name="durability" ngDefaultControl>sehr schlecht</label>
+          <label class="btn btn-primary" [(ngModel)]="product.durability" btnRadio="2" name="durability" ngDefaultControl>schlecht</label>
+          <label class="btn btn-primary" [(ngModel)]="product.durability" btnRadio="3" name="durability" ngDefaultControl>ok</label>
+          <label class="btn btn-primary" [(ngModel)]="product.durability" btnRadio="4" name="durability" ngDefaultControl>sehr gut</label>
         </div>
       </div>
     </div>
@@ -61,18 +65,18 @@
     {{diagnostic}}
   </p>
   <p>
-    Name: {{newProduct.name}}<br>
-    EAN: {{newProduct.ean}}<br>
-    Reparierbarkeit: {{newProduct.reparability}}<br>
-    Haltbarkeit: {{newProduct.durability}}<br>
-
+    Name: {{product.name}}<br>
+  <!--
+    EAN: {{product.ean}}<br>
+    Reparierbarkeit: {{product.reparability}}<br>
+    Haltbarkeit: {{product.durability}}<br>
+-->
 
 
   </p>
 
-  <!--
   <p>
-    New Product: {{newProductX}}
+    New Product: {{product}}
 
 
 

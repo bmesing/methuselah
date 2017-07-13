@@ -8,7 +8,13 @@
       "map": "function(doc) { \n  if (doc.type ==\"manufacturer\") \n    emit(doc.name.toLowerCase(), doc);\n}"
     },
     "search_by_phrase": {
-       "map": "function(doc) {\nif (doc.type ==\"product\") {\nif (doc.type)\nemit(doc.name.toLowerCase(), doc);\nif (doc.ean)\nemit (doc.ean, doc);\n}\n}\n"
+       "map": "function(doc) {\nif (doc.type ==\"product\") {\nif (doc.name)\nemit(doc.name.toLowerCase(), doc);\nif (doc.ean)\nemit (doc.ean, doc);\n}\n}\n"
+    },
+    "products_by_ean": {
+       "map": "function(doc) {\nif (doc.type ==\"product\") { if (doc.ean)\nemit (doc.ean, doc);\n}\n}\n"
+    },
+    "products_by_name": {
+       "map": "function(doc) {\nif (doc.type ==\"product\") { if (doc.name)\nemit (doc.name, doc);\n}\n}\n"
     }
   }
 }

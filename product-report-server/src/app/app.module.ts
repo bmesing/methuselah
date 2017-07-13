@@ -10,7 +10,9 @@ import { DashboardComponent } from "./component/dashboard/dashboard.component";
 import { ProductService } from "./domain/product.service";
 import { AppRoutingModule } from "./app-routing.module";
 import { AddReviewComponent } from "./component/add-review/add-review.component";
+
 import { ButtonsModule } from "ng2-bootstrap";
+import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
 import { FileSelectDirective, FileDropDirective, FileUploader } from 'ng2-file-upload/ng2-file-upload';
 
 
@@ -25,6 +27,7 @@ import { FileSelectDirective, FileDropDirective, FileUploader } from 'ng2-file-u
     ],
     imports: [
         ButtonsModule.forRoot(),
+        TypeaheadModule.forRoot(),
         BrowserModule,
         FormsModule,
         HttpModule,

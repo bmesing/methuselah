@@ -11,12 +11,11 @@ import {Http, Response} from "@angular/http";
 import {Body} from "@angular/http/src/body";
 import {Observable} from "rxjs/Observable";
 import 'rxjs/Rx'
+import { Subject } from "rxjs/Subject";
 
 
 @Injectable()
 export class ProductService {
-
-
     private static databaseName : string = "products";
     private static baseUrl : string = "http://127.0.0.1:5984/" + ProductService.databaseName + "/";
 
@@ -46,6 +45,13 @@ export class ProductService {
         return this.http.get(ProductService.baseUrl + "_design/products/_view/search_by_phrase?startkey=\"" + searchTerm.toLowerCase() + "\"&endkey=\"" + searchTerm.toUpperCase() + "\uffff\"")
             .map(response => ProductService.extractProducts(response));
     }
+
+    searchEan(eanSearchString: string) : Observable<Product[]> {
+        console.log("searchEan: searching for " + eanSearchString);
+        return this.http.get(ProductService.baseUrl + "_design/products/_view/products_by_ean?startkey=\"" + eanSearchString.toLowerCase() + "\"&endkey=\"" + eanSearchString.toUpperCase() + "\uffff\"")
+            .map(response => ProductService.extractProducts(response))
+    }
+
 
     addReview(product: Product) : Observable<Product> {
         return this.http.post(ProductService.baseUrl, product)
@@ -95,7 +101,7 @@ export class ProductService {
     }
 
     private static extractProducts(body : Body) : Product[] {
-        console.log("Response: " + body);
+        console.log("extractProducts: Response: " + body);
         let products : Product[] = [];
         for (var row of body.json().rows) {
             products.push(row.value as Product)
