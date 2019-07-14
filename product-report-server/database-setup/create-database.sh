@@ -1,6 +1,9 @@
 #!/bin/bash
 
-export DATABASE_HOST="http://127.0.0.1:5984/"
+echo "Please enter password for creating databases"
+read -sp "Password: " PASSWORD
+
+export DATABASE_HOST="https://admin:${PASSWORD}@methuselah.smileupps.com/"
 export PRODUCT_DATABASE_NAME="products"
 export REVIEW_DATABASE_NAME="review"
 
