@@ -112,7 +112,7 @@ export class AddReviewComponent implements OnInit {
         console.log(event);
         this.product.name = event.value;
 
-        TODO: continue here
+    //    TODO: continue here
     }
 
     onSubmit() : void {
