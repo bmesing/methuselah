@@ -8,8 +8,8 @@ import {Product} from "../../domain/product";
 import {ProductService} from "../../domain/product.service";
 import {Router} from "@angular/router";
 
-import { Subject } from 'rxjs/Subject';
-import { Observable } from 'rxjs/Observable';
+import { Subject } from 'rxjs';
+import { Observable } from 'rxjs';
 
 
 @Component({

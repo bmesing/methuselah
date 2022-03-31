@@ -10,8 +10,9 @@ import {Product} from "../../domain/product";
 import {ButtonRadioDirective} from 'ng2-bootstrap';
 import {NgForm} from "@angular/forms";
 import { Subject } from "rxjs";
-import { Observable } from "rxjs/Observable";
-import { TypeaheadMatch } from 'ngx-bootstrap/typeahead';
+import { Observable } from "rxjs";
+
+import { TypeaheadMatch } from "@ng-bootstrap/ng-bootstrap";
 
 
 export class ProductTypeAhead {

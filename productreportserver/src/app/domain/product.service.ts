@@ -7,79 +7,78 @@ import {CouchResponse} from "./couchresponse";
 import {CouchSearchResponse} from "./couchsearchresponse";
 import {Manufacturer} from "./manufacturer";
 import {Product, Attachment} from "./product";
-import {Http, Response} from "@angular/http";
-import {Body} from "@angular/http/src/body";
-import {Observable} from "rxjs/Observable";
-import 'rxjs/Rx'
-import { Subject } from "rxjs/Subject";
-
+import {HttpClient, HttpResponse} from "@angular/common/http";
+import {Observable} from "rxjs";
+import { map, mergeAll } from 'rxjs/operators';
 
 @Injectable()
 export class ProductService {
     private static databaseName : string = "products";
     private static baseUrl : string = "http://127.0.0.1:5984/" + ProductService.databaseName + "/";
 
-    constructor(private http: Http) {}
+    constructor(private http: HttpClient) {}
 
     getProducts() : Observable<Product[]> {
-        return this.http.get(ProductService.baseUrl + "_design/products/_view/products")
-            .map(response => ProductService.extractProducts(response));
+        return this.http.get<Product[]>(ProductService.baseUrl + "_design/products/_view/products")
     }
 
-    getProduct(id: string) : Observable<Product> {
+    getProduct(id: string) : Observable<Product | undefined> {
         return this
             .getProducts()
-            .flatMap(products => Observable.from(products))
-            .first(product => product._id === id);
+            .pipe(
+                map(products => products.find(product => product._id === id))
+            );
     }
 
     searchManufacturer(searchTerm: string) : Observable<Manufacturer[]> {
         console.log("searching for " + searchTerm);
-        return this.http.get(ProductService.baseUrl + "_design/products/_view/manufacturers?startkey=\"" + searchTerm.toLowerCase() + "\"&endkey=\"" + searchTerm.toUpperCase() + "\uffff\"")
-            .map(response => ProductService.extractManufacturers(response));
+        return this.http.get<Manufacturer[]>(ProductService.baseUrl + "_design/products/_view/manufacturers?startkey=\"" 
+                                            + searchTerm.toLowerCase() + "\"&endkey=\"" + searchTerm.toUpperCase() + "\uffff\"")
     }
 
 
     search(searchTerm: string) : Observable<Product[]> {
         console.log("searching for " + searchTerm);
-        return this.http.get(ProductService.baseUrl + "_design/products/_view/search_by_phrase?startkey=\"" + searchTerm.toLowerCase() + "\"&endkey=\"" + searchTerm.toUpperCase() + "\uffff\"")
-            .map(response => ProductService.extractProducts(response));
+        return this.http.get<Product[]>(ProductService.baseUrl + "_design/products/_view/search_by_phrase?startkey=\"" 
+                                        + searchTerm.toLowerCase() + "\"&endkey=\"" + searchTerm.toUpperCase() + "\uffff\"")
     }
 
     searchEan(eanSearchString: string) : Observable<Product[]> {
         console.log("searchEan: searching for " + eanSearchString);
-        return this.http.get(ProductService.baseUrl + "_design/products/_view/products_by_ean?startkey=\"" + eanSearchString.toLowerCase() + "\"&endkey=\"" + eanSearchString.toUpperCase() + "\uffff\"")
-            .map(response => ProductService.extractProducts(response))
+        return this.http.get<Product[]>(ProductService.baseUrl + "_design/products/_view/products_by_ean?startkey=\"" 
+                                    + eanSearchString.toLowerCase() + "\"&endkey=\"" + eanSearchString.toUpperCase() + "\uffff\"")
     }
 
 
     addReview(product: Product) : Observable<Product> {
-        return this.http.post(ProductService.baseUrl, product)
-            .map(response => response.json());
+        return this.http.post<Product>(ProductService.baseUrl, product)
     }
 
     hasManufacturer(name : string) : Observable<boolean> {
-        return this.http.get(ProductService.baseUrl + "_design/products/_view/manufacturer?key=\"" + name.toLowerCase() + "\"")
-            .map(response => response.json() as CouchSearchResponse)
-            .map(couchSearchResponse => couchSearchResponse.totalRows > 0);
+        return this.http.get<CouchSearchResponse>(ProductService.baseUrl + "_design/products/_view/manufacturer?key=\"" + name.toLowerCase() + "\"").pipe(
+            map(couchSearchResponse => couchSearchResponse.totalRows > 0)
+        )
     }
 
     getAttachmentUrl(product: Product) : string{
         return ProductService.baseUrl + product._id + "/" + Math.ceil(Math.random() * 100000000)  + "?rev=" + product._rev;
-    }
+    }   
 
-    deleteProduct(itemId: string, rev: string): Observable<Response> {
-        return this.http.delete(ProductService.baseUrl + itemId + "?rev=" + rev);
+    deleteProduct(itemId: string, rev: string): Observable<HttpResponse<Object>> {
+        return this.http.delete(ProductService.baseUrl + itemId + "?rev=" + rev,  { observe: 'response' });
     }
 
     addProduct(newProduct: Product, manufacturerName: string) : Observable<Product> {
         return this.http
-            .post(ProductService.baseUrl, ProductService.createManufacturerForName(manufacturerName))
-            .map(resonse => resonse.json() as CouchResponse)
-            .flatMap(couchResponse => {
-                newProduct.manufacturerId = couchResponse.id;
-                return this.http.post(ProductService.baseUrl, newProduct).map(response => response.json());
-            })
+            .post<Manufacturer>(ProductService.baseUrl, ProductService.createManufacturerForName(manufacturerName))
+            .pipe(
+                map(manufacturer => {
+                    newProduct.manufacturerId = manufacturer._id;
+                    return this.http.post<Product>(ProductService.baseUrl, newProduct)
+                }),
+                mergeAll()
+
+            )
     }
 
     private static createManufacturerForName(name: string) : Manufacturer {
@@ -92,13 +91,14 @@ export class ProductService {
     private static getAttachments(product : Product) : Attachment[]  {
         var result : Attachment[] = [];
         for (var attachment in product._attachments) {
-            console.log(product._attachments[attachment]);
-            result.push(product._attachments[attachment] as Attachment)
+            //console.log(product._attachments[attachment]);
+            //result.push(product._attachments[attachment] as Attachment)
             result[result.length - 1].fileName = ProductService.baseUrl + product._id + "/" + attachment;
         }
         return result;
 
     }
+    /*
 
     private static extractProducts(body : Body) : Product[] {
         console.log("extractProducts: Response: " + body);
@@ -119,5 +119,5 @@ export class ProductService {
         }
         return manufacturers;
     }
-
+*/
 }

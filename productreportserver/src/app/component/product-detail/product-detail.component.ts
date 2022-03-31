@@ -7,10 +7,10 @@ import { ActivatedRoute, Params } from "@angular/router";
 import { Location }                 from '@angular/common';
 import { Product } from "../../domain/product";
 import { ProductService } from "../../domain/product.service";
-import { FileUploader } from 'ng2-file-upload/ng2-file-upload';
+import { FileUploadModule } from 'ng2-file-upload';
+import { FileUploader } from 'ng2-file-upload';
 
-
-import 'rxjs/add/operator/switchMap';
+import { switchMap } from 'rxjs/operators';
 
 @Component({
     selector: 'product-detail',
