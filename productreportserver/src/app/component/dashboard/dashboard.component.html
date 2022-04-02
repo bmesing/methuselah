@@ -17,12 +17,14 @@
       <td><a [routerLink]="['/product-detail', product._id]" >{{product.name}}</a></td>
         <td>{{product.ean}}</td>
         <td>{{product.reparability !== undefined ? product.reparability : "keine Bewertung"}}</td>
+<!--
         <td *ngIf="deleteModeActive">
             <button type="button" (click)="deleteProduct(product)" class="btn btn-sm btn-danger">
                 <i class="glyphicon glyphicon-remove-circle">
                 </i>
             </button>
         </td>
+    -->
     </tr>
     </tbody>
 </table>
@@ -31,7 +33,8 @@
 <button class="btn btn-primary dashboard-button" (click)="navigateToAddReview()" >Produkt bewerten</button>
 
 <hr>
-
+<!--
 <button type="button" checkable="true" checked="true" (click)="toggleDeleteMode()" class="btn btn-sm btn-danger" [class.active]="deleteModeActive">
   Löschenmodus
 </button>
+  -->

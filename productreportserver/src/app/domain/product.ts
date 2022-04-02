@@ -12,5 +12,6 @@ export class Product {
     ean: string;
     manufacturerId: string;
     reparability: string | undefined;
+    durability: string | undefined;
     readonly type="product";
 }

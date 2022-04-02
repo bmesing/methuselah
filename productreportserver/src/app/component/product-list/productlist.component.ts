@@ -4,8 +4,6 @@
 
 import {Component, OnInit} from "@angular/core";
 import {ProductService} from "../../domain/product.service";
-import 'rxjs/add/operator/do'
-import 'rxjs/Rx'
 import {Product} from "../../domain/product";
 import {Router} from "@angular/router";
 

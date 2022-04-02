@@ -6,12 +6,13 @@
   <form class="form-horizontal" (ngSubmit)="onSubmit()">
 
     <input type="text" placeholder="EAN" class="form-control" [(ngModel)]="product.ean" name="ean" autocomplete="off" 
-        [typeahead]="dataSource" 
-        typeaheadOptionsLimit="20"
-        (typeaheadOnSelect)="onProductSelected($event)"
-        typeaheadOptionField="displayName"
+        [ngbTypeahead]="dataSource" 
         /><br>
-    <input type="text" placeholder="Hersteller" class="form-control" [(ngModel)]="manufacturerName" name="manufacturer" required/><br>
+        <!--
+        (ngTypeaheadOnSelect)="onProductSelected($event)"
+        ngTypeaheadOptionField="displayName"
+        -->
+        <input type="text" placeholder="Hersteller" class="form-control" [(ngModel)]="manufacturerName" name="manufacturer" required/><br>
     <input type="text" placeholder="Produktname" class="form-control"  [(ngModel)]="product.name" name ="name" required/><br>
 
     <div class="form-group">

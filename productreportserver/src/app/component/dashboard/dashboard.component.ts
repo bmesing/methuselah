@@ -8,9 +8,9 @@ import {Product} from "../../domain/product";
 import {ProductService} from "../../domain/product.service";
 import {Router} from "@angular/router";
 
-import { Subject } from 'rxjs';
-import { Observable } from 'rxjs';
+import { from, Subject, Observable } from 'rxjs';
 
+import { debounceTime, distinctUntilChanged, switchMap, catchError } from 'rxjs/operators';
 
 @Component({
     selector: 'dashboard',
@@ -29,18 +29,18 @@ export class DashboardComponent implements OnInit {
     }
 
     ngOnInit() : void {
-        this.searchTerms
-            .debounceTime(300)
-            .distinctUntilChanged()
-            .switchMap(
-                term => term ? this.productService.search(term) : Observable.of<Product[]>([])
-            )
-            .catch(error => {
+        this.searchTerms.pipe(
+            debounceTime(300),
+            distinctUntilChanged(),
+            switchMap(
+                term => term ? this.productService.search(term) : from<Product[][]>([])
+            ),
+            catchError(error => {
                 // TODO: add real error handling
                 console.log(error);
-                return Observable.of<Product[]>([]);
+                return from<Product[][]>([]);
             })
-            .subscribe(products => this.products = products);
+        ).subscribe((products: Product[]) => this.products = products);
     }
 
     navigateToAddReview() : void {

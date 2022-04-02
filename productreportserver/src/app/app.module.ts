@@ -12,7 +12,6 @@ import { AppRoutingModule } from "./app-routing.module";
 import { AddReviewComponent } from "./component/add-review/add-review.component";
  
 import { NgbModule } from"@ng-bootstrap/ng-bootstrap";
-import { TestComponent } from './test/test.component';
 //import { FileSelectDirective, FileDropDirective, FileUploader } from 'ng2-file-upload/ng2-file-upload';
 
 

@@ -7,13 +7,13 @@ import {ProductService} from "../../domain/product.service";
 import {Router} from "@angular/router";
 import {Product} from "../../domain/product";
 
-import {ButtonRadioDirective} from 'ng2-bootstrap';
-import {NgForm} from "@angular/forms";
 import { Subject } from "rxjs";
 import { Observable } from "rxjs";
+import { from, tap } from "rxjs";
 
-import { TypeaheadMatch } from "@ng-bootstrap/ng-bootstrap";
+import { NgbTypeaheadSelectItemEvent } from '@ng-bootstrap/ng-bootstrap';
 
+import { map, catchError, mergeAll } from 'rxjs/operators';
 
 export class ProductTypeAhead {
     constructor(
@@ -36,8 +36,18 @@ export class AddReviewComponent implements OnInit {
 
     eanSearchTerms = new Subject<string>();
 
-    public dataSource: Observable<any>;
+    dataSource =  (eanInput$: Observable<string>) => 
+    eanInput$
+    .pipe(
+        tap( ean => console.log("ngOnInit.next: " + ean)),
+        map( ean => this.getEanAutocompletes(ean) ),
+        mergeAll()
+    )
 
+    search = (text$: Observable<string>) =>
+    text$.pipe(
+      map(term => [])
+    );
 
     autoCompleteProducts: string[] = [];
 
@@ -79,27 +89,20 @@ export class AddReviewComponent implements OnInit {
             });
             */
 
-        this.dataSource = Observable
-            .create((observer: any) => {
-                // Runs on every search
-                observer.next(this.product.ean);
-            })
-            .do( value => console.log("ngOnInit.next: " + value))
-            .mergeMap((token: string) => this.getEanAutocompletes(token));
     }
 
-    getEanAutocompletes(term) : Observable<any> {
+    getEanAutocompletes(term : string) : Observable<ProductTypeAhead[]> {
         console.log("getEanAutocompletes: " + term);
 
-        //return term ? this.productService.searchEan(term) : Observable.of<Product[]>([])
         return this.productService.searchEan(term)
-            .map(products => this.mapToTypeaheadItems(products))
-            .catch(error => {
-                // TODO: add real error handling
-                console.log(error);
-                return Observable.of<string[]>([]);
-            })
-            .switchMap(values => Observable.of(values)); 
+            .pipe(
+                map(products => this.mapToTypeaheadItems(products)),
+                catchError(error => {
+                    // TODO: add real error handling
+                    console.log(error);
+                    return from<ProductTypeAhead[][]>([]);
+                })
+            )
     }
 
 
@@ -108,10 +111,10 @@ export class AddReviewComponent implements OnInit {
 
     }
 
-    onProductSelected(event : TypeaheadMatch) {
+    onProductSelected(event : NgbTypeaheadSelectItemEvent<string>) {
 
         console.log(event);
-        this.product.name = event.value;
+        this.product.name = event.item;
 
     //    TODO: continue here
     }

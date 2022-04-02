@@ -31,9 +31,13 @@ export class ProductDetailComponent implements OnInit {
     ) {}
 
     ngOnInit(): void {
-        this.route.params.switchMap((params: Params) =>
-                this.productService.getProduct(params['id'])
+        this.route.params.pipe(
+            switchMap((params: Params) => this.productService.getProduct(params['id']) )
         ).subscribe(product => {
+                if (product === undefined) {
+                    console.log('product undefined')
+                    return
+                }
                 console.log('onNext: %s', product._id);
                 this.product = product
                 // TODO error handling if accessed later, but no uploader was initialized
