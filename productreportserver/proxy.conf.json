@@ -1,0 +1,11 @@
+{
+  "/api/beta": {
+    "target": "https://rw3xo63ati.execute-api.eu-central-1.amazonaws.com",
+    "secure": false,
+    "pathRewrite": {
+      "^/api/beta": "beta"
+    },
+    "logLevel": "info",
+    "changeOrigin" : true
+  }
+}

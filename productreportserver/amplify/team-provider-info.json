@@ -10,6 +10,14 @@
       "StackName": "amplify-methuselah-dev-155204",
       "StackId": "arn:aws:cloudformation:eu-central-1:789784087286:stack/amplify-methuselah-dev-155204/16fa49f0-b28c-11ec-85e1-026dfaab7e9c",
       "AmplifyAppId": "d3lnbyk7c4cxoo"
+    },
+    "categories": {
+      "hosting": {
+        "amplifyhosting": {
+          "appId": "d3lnbyk7c4cxoo",
+          "type": "manual"
+        }
+      }
     }
   }
 }

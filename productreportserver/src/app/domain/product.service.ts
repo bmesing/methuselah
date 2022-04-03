@@ -19,7 +19,7 @@ export class ProductService {
     constructor(private http: HttpClient) {}
 
     getProducts() : Observable<Product[]> {
-        return this.http.get<Product[]>(ProductService.baseUrl + "_design/products/_view/products")
+        return this.http.get<Product[]>(ProductService.baseUrl + "products")
     }
 
     getProduct(id: string) : Observable<Product | undefined> {

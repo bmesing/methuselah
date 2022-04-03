@@ -1,10 +1,15 @@
 # MethuselahAngular
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.3.0.
+This project was regenerated with [Angular CLI](https://github.com/angular/angular-cli) version 13.3.0.
 
-## Development server
+## Development server (local)
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+Run `ng serve --proxy-config proxy.conf.json` for a dev server. proxy config is required to avoid CORS issues with backend on AWS. 
+Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+
+## AWS Amplify
+
+Run `amplify publish` from top level directory (pushes to dev....amplifyapp.com)
 
 ## Code scaffolding
 
@@ -21,6 +26,13 @@ Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.
 ## Running end-to-end tests
 
 Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+
+
+## Add new endpoint
+
+* create AWS lamda function implementing the logic
+* create new ressource in API gateway mapping to the AWS lamda as *AWS lambda proxy*
+* deploy API
 
 ## Further help
 
