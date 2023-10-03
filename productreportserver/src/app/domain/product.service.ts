@@ -14,12 +14,12 @@ import { map, mergeAll } from 'rxjs/operators';
 @Injectable()
 export class ProductService {
     private static databaseName : string = "products";
-    private static baseUrl : string = "http://127.0.0.1:5984/" + ProductService.databaseName + "/";
+    private static baseUrl : string = "https://rw3xo63ati.execute-api.eu-central-1.amazonaws.com/beta/" + ProductService.databaseName + "/";
 
     constructor(private http: HttpClient) {}
 
     getProducts() : Observable<Product[]> {
-        return this.http.get<Product[]>(ProductService.baseUrl + "products")
+        return this.http.get<Product[]>(ProductService.baseUrl)
     }
 
     getProduct(id: string) : Observable<Product | undefined> {

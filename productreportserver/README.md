@@ -9,7 +9,7 @@ Navigate to `http://localhost:4200/`. The application will automatically reload 
 
 ## AWS Amplify
 
-Run `amplify publish` from top level directory (pushes to dev....amplifyapp.com)
+Run `amplify publish` from productreportserver directory (pushes to dev....amplifyapp.com)
 
 ## Code scaffolding
 
